@@ -1,0 +1,69 @@
+<project basedir="." default="deploy" name="converter">
+		
+	<property name="build.home" value="${basedir}/build"/>	
+	<property name="jsp.dir" value="${basedir}/webapp/jsp"/>
+	<property name="lib.home" value="../int-lib"/>
+	<property name="build.dist.home" value="${build.home}/dist"/>
+    <property name="build.classes.home" value="${build.home}/classes"/>   
+  
+	
+	<path id="compile.classpath">	
+	   <pathelement location="${java.home}/../lib/tools.jar"/>  			
+ 	     <fileset dir="${lib.home}/third-party">          
+ 	     	<include name="javax.servlet-api-3.0.1.jar"/>     
+        </fileset>	 	 
+ 	</path>
+	
+	<target name="setup" depends="clean">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.classes.home}"/>
+        <mkdir dir="${build.dist.home}"/>
+	</target>
+
+    <target name="clean">
+        <delete dir="${build.home}" includeEmptyDirs="true" />
+    </target>
+    
+    <target name="compile" depends="setup">    	
+    	<javac destdir="${build.classes.home}" debug="true" srcdir="${basedir}/src">
+    		<classpath refid="compile.classpath"/>
+        </javac>    	
+	</target>
+	
+	<target name="create-war" depends="create-jar">
+		<war destfile="${build.dist.home}/web-app.war"   webxml="${basedir}/webapp/WEB-INF/web.xml">        		 		 
+		<fileset dir="${basedir}/webapp">
+      		<include name="**/*.*"/>
+        </fileset>
+		 <!-- 
+	 	<lib dir="${lib.home}/internal-build">
+		   <include name="payload-java-beans.jar"/>
+		 </lib> -->
+	  </war>   
+	 </target>
+	 
+	<target name="create-jar" depends="compile">
+		<jar destfile="${build.dist.home}/web-app.jar">
+			<fileset dir="${build.classes.home}"/>		   
+		</jar>
+		<copy  overwrite = "true" file="${build.dist.home}/web-app.jar" todir="${basedir}/webapp/WEB-INF/lib"/>				
+	 </target>
+	
+	<target name="create-ear" depends="create-war">
+		
+	</target>	
+	
+	<presetdef name="asadmin">
+	  <java jar="/home/reboot/Work/Software/glassfish/glassfish3/glassfish/modules/admin-cli.jar" fork="true" jvm="${java.home}/bin/java" >
+	    <arg line="--port 4848" />
+	  </java>
+	</presetdef>
+	<target name="deploy" depends="create-ear">
+	  <asadmin failonerror="true">
+	    <arg value="deploy" />
+	    <arg value="--force=true" />
+	    <arg value="build/dist/web-app.war" />
+	  </asadmin>
+	</target>
+	
+</project>

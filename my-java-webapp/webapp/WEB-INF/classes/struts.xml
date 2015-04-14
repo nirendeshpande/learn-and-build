@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <!-- 
+ <!DOCTYPE struts SYSTEM "http://struts.apache.org/dtds/struts-2.0.dtd" 
+ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"> -->
+
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+  
+<struts>
+<constant value="true" name="struts.devMode"/>
+	<package name="default" namespace="/" extends="struts-default">
+
+	 	<action name="entry">
+			<result>jsp/Login.jsp</result>
+		</action> 
+	
+		<action name="login" method="execute" class="com.niren.webapp.action.LoginAction">
+			<result name="success">jsp/Loginprocess.jsp</result>
+		</action>
+		
+	</package>
+</struts>
