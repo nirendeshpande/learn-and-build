@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>rest-service-jaxb-example</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>classes</name>
+			<type>2</type>
+			<location>/home/reboot/Work/Pracspace1/rest-service-jaxb-example/build/classes</location>
+		</link>
+		<link>
+			<name>tools.jar</name>
+			<type>2</type>
+			<location>/usr/lib/jvm/java-6-openjdk-i386/lib/tools.jar</location>
+		</link>
+	</linkedResources>
+</projectDescription>

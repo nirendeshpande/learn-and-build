@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="classes" path="src"/>
+	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+	<classpathentry kind="con" path="/usr/lib/jvm/java-6-openjdk-i386/lib/tools.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/gmbal.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/javax.ejb.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/jaxb-api-osgi.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/jaxb-osgi.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/jersey-client.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/jersey-core.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/webservices-api-osgi.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/third-party/webservices-osgi.jar"/>
+	<classpathentry kind="lib" path="/home/reboot/Work/Pracspace1/int-lib/internal-build/payload-java-beans.jar"/>
+	<classpathentry kind="output" path="build"/>
+</classpath>
