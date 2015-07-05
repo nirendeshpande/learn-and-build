@@ -1,0 +1,42 @@
+<jxb:bindings version="1.0"
+               xmlns="http://java.sun.com/xml/ns/jaxb"
+			   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jxb:extensionBindingPrefixes="xjc">
+  <jxb:bindings>
+  
+  <!-- 
+       For enum to get generated we have to remove the following two attributes.
+       
+       typesafeEnumBase="xs:NCName"
+       typesafeEnumMemberName="generateName"		 
+   -->
+  
+    <jxb:globalBindings
+
+         fixedAttributeAsConstantProperty="false"
+         choiceContentProperty="true"
+         enableFailFastCheck="true"
+         generateIsSetMethod="true"		
+	   enableJavaNamingConventions="false"
+	   enableValidation="true">		 
+           <xjc:javaType name="java.lang.Boolean" xmlType="xs:boolean" adapter="com.niren.payload.datatypeadapter.BooleanAdapter"/>
+	     <xjc:javaType name="java.lang.Integer" xmlType="xs:int" adapter="com.niren.payload.datatypeadapter.IntegerAdapter"/>
+	     <xjc:javaType name="java.lang.Long" xmlType="xs:long" adapter="com.niren.payload.datatypeadapter.LongAdapter"/>
+	     <xjc:javaType name="java.lang.Short" xmlType="xs:short" adapter="com.niren.payload.datatypeadapter.ShortAdapter"/>
+	     <xjc:javaType name="java.lang.Double" xmlType="xs:double" adapter="com.niren.payload.datatypeadapter.DoubleAdapter"/>
+	     <xjc:javaType name="java.lang.Float" xmlType="xs:float" adapter="com.niren.payload.datatypeadapter.FloatAdapter"/>
+	     <xjc:javaType name="java.lang.Byte" xmlType="xs:byte" adapter="com.niren.payload.datatypeadapter.ByteAdapter"/>
+	     <xjc:javaType name="java.lang.Long" xmlType="xs:unsignedInt" adapter="com.niren.payload.datatypeadapter.LongAdapter"/>
+	     <xjc:javaType name="java.lang.Integer" xmlType="xs:unsignedShort" adapter="com.niren.payload.datatypeadapter.IntegerAdapter"/>
+	     <xjc:javaType name="java.lang.Short" xmlType="xs:unsignedByte" adapter="com.niren.payload.datatypeadapter.ShortAdapter"/>
+     	    
+     	 <xjc:javaType name="java.util.Calendar"
+               xmlType="xs:dateTime"
+               adapter="com.niren.payload.datatypeadapter.CalendarAdapter"/>
+
+	     <xjc:serializable uid="1"/> 		 		
+    </jxb:globalBindings>	
+	</jxb:bindings> 
+</jxb:bindings>

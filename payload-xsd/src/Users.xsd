@@ -1,0 +1,23 @@
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.niren.com/base/bo/Users" 
+xmlns = "http://www.niren.com/base/bo/Users" elementFormDefault="qualified"
+xmlns:User="http://www.niren.com/base/bo/User">
+
+	<xs:import
+        namespace="http://www.niren.com/base/bo/User" schemaLocation="User.xsd">        
+     </xs:import>
+	
+	<xs:element name="Users">               
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="gId" type="number30" /> 
+                <xs:element ref="User:User" maxOccurs="unbounded" minOccurs="0"/>                	                
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="number30">        
+        <xs:restriction base="xs:long">
+            <xs:totalDigits value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

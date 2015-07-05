@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.BeanParam;
@@ -18,18 +19,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.niren.base.bo.order.Order;
 
-@ApplicationPath("/")
+
+//@ApplicationPath("/")
 //@Path("/OrderInfo")
-@Path("/LoginInfo")
+//@Path("/LoginInfo")
 public class LoginService extends Application{
 	public static final Logger logger =
             Logger.getLogger(LoginService.class.getCanonicalName());
-
+/*
 	Order order = null;
 	
 	//@GET
@@ -46,29 +48,16 @@ public class LoginService extends Application{
 		//public Order getOrder(JSONObject json) {  
 		//public Order getOrder(@BeanParam Order ord) {
 		//public Order getToken(@QueryParam("username") String username, @QueryParam("password") String password) {
-		public Order getToken(@QueryParam("token") String token, Order authobj) {
+		public Response getToken(@QueryParam("token") String token, Order authobj) {
+		JSONObject jObject = new JSONObject();
         try { 
-        	System.out.println("Uname is :-->"+authobj.getDescription());
+        	System.out.println("Uname is :-->"+authobj.getCollectionSize());
         	System.out.println("Token is :-->"+token);
-        // Start
         	
-        	//End
-            //order = new Order();
-            order.setId(20);
-            order.setCollectionSize(5);
-            order.setOrderType("XYZ");
-            System.out.println("End ... "+ order.getId());
+            
         } catch (Exception ex) {
-        	/*
-            logger.log(Level.SEVERE,
-                    "Error calling searchCustomer() for customerId {0}. {1}",
-                    new Object[]{orderId, ex.getMessage()});*/
-        }
-        System.out.println("Uname is :-->"+authobj.getDescription());
-        System.out.println("<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>");
-        //System.out.println("Uname is :-->"+authobj.getDescription());
-        //return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
-        return order;
-        //return "Hello User";
-    }   
+        	ex.printStackTrace();
+        }       
+        return Response.ok(authobj).build();        
+    }   */
 }

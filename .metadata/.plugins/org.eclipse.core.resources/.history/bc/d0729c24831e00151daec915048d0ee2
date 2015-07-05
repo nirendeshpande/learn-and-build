@@ -1,0 +1,92 @@
+package niren.rest;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import niren.rest.db.mongo.MongoConnection;
+
+import org.bson.Document;
+import org.json.simple.JSONObject;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.niren.base.bo.order.Order;
+import com.niren.base.bo.user.User;
+import com.niren.base.bo.users.Users;
+
+// http://localhost:8080/rest-service-jaxb-example/UserInfo/users
+
+@ApplicationPath("/")
+@Path("/UserInfo")
+public class CrudService extends Application{
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+	@Path("users/{id}")
+	public JSONObject getUser(@QueryParam("token") String token) {
+		
+		
+		return null;
+	}
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/users")
+	public Response getUsers(@QueryParam("token") String token) {		
+		ObjectMapper mapper;	
+		MongoConnection conn = null;
+		//List<User> listUsers = null;
+		Users allUsers = new Users();
+		MongoCursor<Document> cur = null;
+		try{
+			conn = MongoConnection.getInstance();
+			MongoDatabase database = conn.getDatabase();
+			MongoCollection<Document> collection =  database.getCollection("users");		
+			cur = collection.find().iterator();		
+			//
+			mapper = conn.getJacksonMapper();
+			//listUsers = new ArrayList<User>();
+			//
+			while(cur.hasNext()){							
+				try {
+					//System.out.println(cur.next().toJson());
+					//listUsers.add(mapper.readValue(cur.next().toJson(),User.class));
+					allUsers.getUser().add(mapper.readValue(cur.next().toJson(),User.class));
+					//System.out.println(listUsers.size());
+				} catch (Exception e) {				
+					e.printStackTrace();
+				}
+			}					
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			cur.close();
+			//conn.closeConn();
+		}
+		//return Response.ok(listUsers).build();		
+		return Response.ok().entity(allUsers).build();
+	}
+}

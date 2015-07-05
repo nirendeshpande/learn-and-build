@@ -1,0 +1,112 @@
+<project name="rest-service-jaxb-example" default="deploy" basedir=".">
+    
+	<property name="build.home" value="${basedir}/build"/>
+	<property name="lib.home" value="../int-lib"/>
+	<property name="build.dist.home" value="${build.home}/dist"/>
+    <property name="build.classes.home" value="${build.home}/classes"/>   
+
+	<path id="wsit.classpath">	
+	     <pathelement location="${java.home}/../lib/tools.jar"/>      
+ 	     <fileset dir="${lib.home}/third-party">
+            <include name="javax.ws.rs-api-2.0.1.jar"/>
+ 	     	 <include name="jersey-core.jar"/>
+             <include name="javax.ejb.jar"/>   
+            <include name="webservices-osgi.jar"/>    
+            <include name="webservices-api-osgi.jar"/>
+            <include name="jaxb-api-osgi.jar"/>
+            <include name="gmbal.jar"/>    
+            <include name="javaee.jar"/> 
+            <include name="jaxb-osgi.jar"/>    
+            <include name="jersey-client.jar"/>  	     	
+ 	     	<include name="json-simple-1.1.1.jar"/> 
+ 	     	<include name="gson-2.3.1.jar"/> 	     	
+        </fileset>		
+        <fileset dir="${lib.home}/internal-build">
+           <include name="payload-java-beans.jar"/> 
+        </fileset>
+		
+		 <fileset dir="${lib.home}/third-party/mongo">
+		    <include name="bson-3.0.1.jar"/> 
+		 	<include name="mongodb-java-driver-3.0.2.jar"/> 		    
+		 </fileset>
+		
+		
+ 	</path>
+ 	<!-- 
+	 <taskdef name="apt" classname="com.sun.tools.ws.ant.Apt">
+        <classpath refid="wsit.classpath"/>
+    </taskdef>
+ 	
+	<target name="build-app" depends="setup">		
+		<apt
+            fork="true"
+            debug="${debug}"
+        target="1.7"
+       	verbose="${verbose}"
+       	destdir="${build.classes.home}"   
+       	sourcedestdir="${build.classes.home}"
+      	sourcepath="${basedir}/src">      	
+            <classpath>
+                <path refid="wsit.classpath"/>
+                <pathelement location="${basedir}/src"/>
+            </classpath>                  
+            <source dir="${basedir}/src">
+                <include name="**/*.java"/>                
+            </source>                  
+        </apt>
+	</target>	-->
+	 <target name="build-app" depends="setup">    	
+    	<javac destdir="${build.classes.home}" debug="true" srcdir="${basedir}/src">
+    		<classpath refid="wsit.classpath"/>
+        </javac>    	
+	</target>
+	
+	<target name="setup" depends="clean">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.classes.home}"/>
+        <mkdir dir="${build.dist.home}"/>
+	</target>
+
+    <target name="clean">
+        <delete dir="${build.home}" includeEmptyDirs="true" />
+    </target>
+    
+     <target name="build-app-war" depends="build-app">
+      <war destfile="${build.dist.home}/rest-service-jaxb-example.war" needxmlfile='false'>   <!--  webxml="web/WEB-INF/web.xml"> -->            		 		 
+		 <classes dir="${build.classes.home}"/>
+	 	 <webinf dir="${basedir}/web/WEB-INF" 
+			includes="web.xml">
+		</webinf>	
+		<fileset dir="web" includes="*.jsp"/>  	 
+	 	<lib dir="${lib.home}/internal-build">
+		   <include name="payload-java-beans.jar"/>
+		 </lib>  	
+      	
+      	<lib dir="${lib.home}/third-party">
+      		<include name="gson-2.3.1.jar"/>
+      	</lib> 
+      	
+      	<lib dir="${lib.home}/third-party/mongo">
+      		<include name="bson-3.0.1.jar"/> 
+      	    <include name="mongodb-java-driver-3.0.2.jar"/>       	    
+      	 </lib>
+      	
+      	
+      	 
+	  </war>      	   
+    </target>
+	
+	<presetdef name="asadmin">
+		  <java jar="/home/reboot/Work/Software/glassfish/glassfish3/glassfish/modules/admin-cli.jar" fork="true" jvm="${java.home}/bin/java" >
+		    <arg line="--port 4848" />
+		  </java>
+		</presetdef>
+		<target name="deploy" depends="build-app-war">
+		  <asadmin failonerror="true">
+		    <arg value="deploy" />
+		    <arg value="--force=true" />
+		    <arg value="build/dist/rest-service-jaxb-example.war" />
+		  </asadmin>
+		</target>
+	
+</project>

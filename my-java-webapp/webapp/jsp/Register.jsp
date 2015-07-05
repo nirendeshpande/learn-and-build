@@ -1,7 +1,58 @@
-<h3>Registration Form</h3>  
+<html>
+
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+<script src="../js/LoginController.js"></script> 
+<!-- <script src="js/AngularLoginService.js"></script> -->
+
+  <meta charset="UTF-8">
+
+  <title>MedRecords+ - Login </title>
+
+  <link rel="stylesheet" href="../css/reset.css">
+
+    <link rel="stylesheet" href="../css/loginstyle.css" media="screen" type="text/css" />
+
+</head>
+
+
+
 <br/>  
-<form action="" method="post">  
-	 <TABLE borderColor=#056796 cellSpacing=5 cellPadding=5 align=center border=0>
+<form action="" method="post"> 
+	<div class="wrap"> 
+		<!-- <h3 align='center'>Register</h3> 
+		<br></br>
+		 -->
+		<input type="text" placeholder="username" required x-ng-model="username"/>
+			<div class="bar">
+				<i></i>
+			</div>
+		<input type="text" placeholder="First Name" required x-ng-model="FirstName"/>	
+	 	<div class="bar">
+				<i></i>
+			</div>  		
+		<input type="text" placeholder="Last Name" required x-ng-model="LastName"/>
+		<div class="bar">
+				<i></i>
+			</div>
+		<input type="text" placeholder="Email" required x-ng-model="Email"/>
+		<div class="bar">
+				<i></i>
+			</div>
+		<input type="password" placeholder="password" required x-ng-model="password"/>		
+		<div class="bar">
+				<i></i>
+			</div>
+		<input type="password" placeholder="Retype Password" required x-ng-model="Retype Password"/>
+		<!-- <div class="bar">
+				<i></i>
+			</div>
+			-->
+		<br></br>
+		<button x-ng-click ="callSubmit()">Register</button>
+	<!--  <TABLE borderColor=#056796 cellSpacing=5 cellPadding=5 align=center border=0>
 		<TBODY>
 			<TR>
 				<TD borderColor=#056796>
@@ -43,4 +94,7 @@
 			</TR>
 		</TBODY>
 	</TABLE>  
-</form>  
+	-->
+	</div>
+</form> 
+</html> 

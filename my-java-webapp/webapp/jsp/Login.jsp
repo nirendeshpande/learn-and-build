@@ -1,50 +1,36 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 
 <head>
-<script type="text/javascript" src="js/login.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Login</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+<script src="../js/LoginController.js"></script> 
+<!-- <script src="js/AngularLoginService.js"></script> -->
+
+  <meta charset="UTF-8">
+
+  <title>MedRecords+ - Login </title>
+
+  <link rel="stylesheet" href="../css/reset.css">
+
+    <link rel="stylesheet" href="../css/loginstyle.css" media="screen" type="text/css" />
+
 </head>
 
-<body>
-<h3>Login Form</h3>  
-<br/>  	
-	<form method="post">
-		 <center>
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="2">Login Here</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>User Name</td>
-                        <td><input type="text" name="username" id="uname" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="pass" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="button" value="Login" onclick="callSubmit()"/></td>
-                        <td><input type="reset" value="Reset" /></td>
-                    </tr>
-                    
-                    <tr>
-                       <td colspan="2">Not Registered!! <a href="jsp/Register.jsp">Register Here</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            </center>
+<body x-ng-app="myapp">
+	<div x-ng-controller="HelloController" align="center">
+		<form method="post">
+  			<div class="wrap">
+		<input type="text" placeholder="username" required x-ng-model="username"/>
+		<div class="bar">
+			<i></i>
+		</div>
+		<input type="password" placeholder="password" required x-ng-model="password"/>
+		<a href="" class="forgot_link">forgot ?</a>
+		<button x-ng-click ="callSubmit()">Sign in</button>
+	</div>
 	</form> 
+	 </div> 
 </body>
-</html> 
-
-
-
-  
+</html>

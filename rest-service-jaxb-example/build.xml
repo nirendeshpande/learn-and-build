@@ -17,12 +17,20 @@
             <include name="gmbal.jar"/>    
             <include name="javaee.jar"/> 
             <include name="jaxb-osgi.jar"/>    
-            <include name="jersey-client.jar"/>  
- 	     	<include name="json-simple-1.1.1.jar"/>  
+            <include name="jersey-client.jar"/>  	     	
+ 	     	<include name="json-simple-1.1.1.jar"/> 
+ 	     	<include name="gson-2.3.1.jar"/> 	     	
         </fileset>		
         <fileset dir="${lib.home}/internal-build">
            <include name="payload-java-beans.jar"/> 
         </fileset>
+		
+		 <fileset dir="${lib.home}/third-party/mongo">
+		    <include name="bson-3.0.1.jar"/> 
+		 	<include name="mongo-java-driver-3.0.2.jar"/> 		    
+		 </fileset>
+		
+		
  	</path>
  	<!-- 
 	 <taskdef name="apt" classname="com.sun.tools.ws.ant.Apt">
@@ -73,14 +81,25 @@
 	 	<lib dir="${lib.home}/internal-build">
 		   <include name="payload-java-beans.jar"/>
 		 </lib>  	
+      	
       	<lib dir="${lib.home}/third-party">
-      		<include name="json-simple-1.1.1.jar"/>
+      		<include name="gson-2.3.1.jar"/>
+      		<include name="json-simple-1.1.1.jar"/> 
+      		<include name="jersey-json.jar"/>
       	</lib> 
+      	
+      	<lib dir="${lib.home}/third-party/mongo">
+      		<include name="bson-3.0.1.jar"/> 
+      	    <include name="mongo-java-driver-3.0.2.jar"/>       	    
+      	 </lib>
+      	
+      	
+      	 
 	  </war>      	   
     </target>
 	
 	<presetdef name="asadmin">
-		  <java jar="/home/reboot/Work/Software/glassfish/glassfish3/glassfish/modules/admin-cli.jar" fork="true" jvm="${java.home}/bin/java" >
+		  <java jar="/home/reboot/Work/Software/glassfish/glassfish4/glassfish/modules/admin-cli.jar" fork="true" jvm="${java.home}/bin/java" >
 		    <arg line="--port 4848" />
 		  </java>
 		</presetdef>

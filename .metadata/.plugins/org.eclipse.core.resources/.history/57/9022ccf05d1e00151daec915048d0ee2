@@ -1,0 +1,77 @@
+package niren.rest.db.mongo;
+
+
+import java.io.IOException;
+import java.rmi.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.core.Response;
+
+import niren.rest.CrudService;
+
+import org.bson.Document;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.Block;
+import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
+
+public class MongoConnection {
+	private MongoDatabase db;
+	private MongoClient mongoClient;
+	private static final String host = "ds033740.mongolab.com";  //"192.168.1.9";
+	private static final int port = 27017;
+	private ObjectMapper mapper;
+	
+	private MongoConnection(){
+		try{
+			mongoClient = new MongoClient(host,port);	
+			db = mongoClient.getDatabase("test");	
+		}catch(Exception e){
+			e.printStackTrace();
+		}			
+	}
+	
+	private static MongoConnection conn = new MongoConnection();
+	
+	
+	public static MongoConnection getInstance(){
+		return conn;
+	}
+	
+	public MongoDatabase getDatabase(){
+		return db;
+	}
+	
+	public void closeConn(){
+		System.out.println("Close called");
+		mongoClient.close();
+		System.out.println("Conn closed");
+	}
+	
+	public ObjectMapper getJacksonMapper(){
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		return mapper;
+	}
+	
+	public static void main(String[] s){		
+		
+		CrudService service = new CrudService();
+		Response resp = service.getUsers("Ira");
+		/*
+		ArrayList<Student> rs = (ArrayList<Student>)resp.getEntity();	
+		for(Student std : rs){
+			System.out.println(std.getName());
+		}*/
+	}
+
+}

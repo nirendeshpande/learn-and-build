@@ -4,9 +4,13 @@
   <display-name>My App</display-name>
    
   <welcome-file-list>
+    <welcome-file>jsp/Index.jsp</welcome-file>
+  </welcome-file-list>
+   <!--
+   <welcome-file-list>
     <welcome-file>jsp/AngularLogin.jsp</welcome-file>
   </welcome-file-list>
-  <!--
+ 
   <filter>
 	  <filter-name>struts2</filter-name>
 	  <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

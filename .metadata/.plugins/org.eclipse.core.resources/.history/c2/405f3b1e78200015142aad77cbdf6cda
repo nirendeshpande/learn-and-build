@@ -1,0 +1,59 @@
+<project basedir="." default="payloads-java-beans-jar" name="payload-java-beans">
+		
+	<property name="build.home" value="${basedir}/build"/>
+	<property name="lib.home" value="../int-lib"/>
+	<property name="build.dist.home" value="${build.home}/dist"/>
+    <property name="build.classes.home" value="${build.home}/classes"/>   
+  
+	
+	
+	<path id="wsit.classpath">	  
+     <fileset dir="${lib.home}/third-party">
+            <include name="jersey-core.jar"/>                  
+     </fileset>	
+     <fileset dir="${lib.home}/third-party/jaxb/jaxb-ri-2.2.6/lib">
+            <include name="*.jar"/>                  
+        </fileset>		        
+ 	</path>
+
+	
+	
+	<target name="build-payloads" depends="create-beans">		
+		<javac srcdir="${basedir}/src"
+		         destdir="${build.classes.home}"		         
+		         debug="on"
+			     classpathref="wsit.classpath"
+		         source="1.6"
+		  />
+	</target>	
+	<target name="create-beans" depends="setup">		
+		<java classname = "com.sun.tools.xjc.XJCFacade" fork = "false" classpathref="wsit.classpath">		   
+		    <arg value="../payload-xsd/src"/>
+			<arg value="-extension"/>
+		    <arg value="-d"/>
+		    <arg value="${basedir}/src"/>
+			<arg value="-b"/>
+			<arg value="${basedir}/conf/binding.xjb"/>
+		</java>
+	</target>
+	
+	<target name="setup" depends="clean">
+	    <mkdir dir="${basedir}/src/"/>
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.classes.home}"/>
+        <mkdir dir="${build.dist.home}"/>
+	</target>
+
+    <target name="clean">
+        <delete dir="${build.home}" includeEmptyDirs="true" />
+        <delete dir="${basedir}/src" includeEmptyDirs="true" />
+    </target>
+	
+	<target name="payloads-java-beans-jar" depends="build-payloads">
+		<jar destfile="${build.dist.home}/payload-java-beans.jar">
+		    <fileset dir="${build.classes.home}"/>		   
+		</jar>
+		<copy  overwrite = "true" file="${build.dist.home}/payload-java-beans.jar" todir="${lib.home}/internal-build"/>
+	 </target>
+	
+</project>

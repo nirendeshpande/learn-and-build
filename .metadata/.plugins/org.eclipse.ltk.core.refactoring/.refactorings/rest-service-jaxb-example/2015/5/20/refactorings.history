@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;niren.rest.db.mongo.MongoClient&apos; to &apos;MongoConnection&apos;&#x0A;- Original project: &apos;rest-service-jaxb-example&apos;&#x0A;- Original element: &apos;niren.rest.db.mongo.MongoClient&apos;&#x0A;- Renamed element: &apos;niren.rest.db.mongo.MongoConnection&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;MongoClient&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;niren.rest.db.mongo{MongoClient.java[MongoClient" matchStrategy="1" name="MongoConnection" qualified="false" references="true" similarDeclarations="false" stamp="1431264531066" textual="false" version="1.0"/>
+</session>

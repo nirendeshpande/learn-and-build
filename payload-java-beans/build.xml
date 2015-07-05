@@ -29,13 +29,16 @@
 	<target name="create-beans" depends="setup">		
 		<java classname = "com.sun.tools.xjc.XJCFacade" fork = "false" classpathref="wsit.classpath">		   
 		    <arg value="../payload-xsd/src"/>
+			<arg value="-extension"/>
 		    <arg value="-d"/>
 		    <arg value="${basedir}/src"/>
+			<arg value="-b"/>
+			<arg value="${basedir}/conf/binding.xjb"/>			
 		</java>
 	</target>
 	
 	<target name="setup" depends="clean">
-	    <mkdir dir="${basedir}/src"/>
+	    <mkdir dir="${basedir}/src/"/>
         <mkdir dir="${build.home}"/>
         <mkdir dir="${build.classes.home}"/>
         <mkdir dir="${build.dist.home}"/>

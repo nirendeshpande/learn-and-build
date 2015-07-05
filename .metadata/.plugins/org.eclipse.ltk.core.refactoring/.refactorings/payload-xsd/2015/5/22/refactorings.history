@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;payload-xsd/src/Student.xsd&apos; to &apos;User.xsd&apos;" description="Rename resource &apos;Student.xsd&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Student.xsd" name="User.xsd" stamp="1432530806340" updateReferences="true"/>
+</session>

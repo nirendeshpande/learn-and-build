@@ -1,0 +1,113 @@
+package niren.rest;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
+import niren.rest.db.mongo.MongoConnection;
+
+import org.bson.Document;
+import org.json.simple.JSONObject;
+
+
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+/*
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+*/
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.niren.base.bo.user.User;
+import com.niren.base.bo.users.Users;
+import com.sun.xml.bind.JAXBObject;
+
+// http://localhost:8080/rest-service-jaxb-example/UserInfo/users
+//http://localhost:8080/rest-service-jaxb-example/UserInfo/users?token=1111111112
+
+@ApplicationPath("/")
+@Path("/UserInfo")
+public class CrudService extends Application{
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+	@Path("users/{id}")
+	public JSONObject getUser(@QueryParam("token") String token) {
+		
+		
+		return null;
+	}
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/users")
+	public Response getUsers(@QueryParam("token") Long token) {		
+		//ObjectMapper mapper;
+		
+		MongoConnection conn = null;
+		//List<User> listUsers = null;
+		Users users = new Users();
+		//MongoCursor<Document> cur = null;
+		Gson gson = new Gson();
+		
+			conn = MongoConnection.getInstance();
+			MongoDatabase database = conn.getDatabase();
+			FindIterable<Document> iterable =  database.getCollection("users").find(new Document("gId", new Long(token)));
+			users = gson.fromJson(iterable.first().toJson(),Users.class);
+			System.out.println(users.getGId());
+			//cur.close();
+			//conn.closeConn();
+		
+		//return Response.ok(listUsers).build();		
+		return Response.ok().entity(users).build();
+	}	
+	
+	
+	@POST
+	//@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/users")
+	public Response addUser(JsonObject users){
+	//public Response addUser(String users){
+		System.out.println("gId is "+users.toString());
+		//System.out.println("Size is "+users.getAge());
+		/*
+		if(users.getGId() == 0){
+			//ResponseBuilder response = Response.status(477).entity("Id must be Populated");						
+			return Response.status(477).entity("Id must be Populated").build();
+		}
+		
+		Gson gson = new Gson();
+		MongoConnection conn = null;
+		conn = MongoConnection.getInstance();		
+		MongoDatabase database = conn.getDatabase();
+		MongoCollection<Document> collection =  database.getCollection("users");
+		collection.insertOne(Document.parse(gson.toJson(users, Users.class)));
+		//conn.closeConn();		 
+		 */
+		return Response.ok().build();
+	}
+}

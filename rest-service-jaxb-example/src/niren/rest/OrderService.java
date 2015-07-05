@@ -20,14 +20,14 @@ import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.niren.base.bo.order.Order;
 
-@ApplicationPath("/")
-@Path("/OrderInfo")
+
+//@ApplicationPath("/")
+//@Path("/OrderInfo")
 public class OrderService extends Application{
 	public static final Logger logger =
             Logger.getLogger(OrderService.class.getCanonicalName());
-
+/*
 	Order order = null;
 	
 	@GET
@@ -52,14 +52,15 @@ public class OrderService extends Application{
             order.setOrderType("XYZ");
             System.out.println("End ... "+ order.getId());
         } catch (Exception ex) {
-        	/*
+        	
             logger.log(Level.SEVERE,
                     "Error calling searchCustomer() for customerId {0}. {1}",
-                    new Object[]{orderId, ex.getMessage()});*/
+                    new Object[]{orderId, ex.getMessage()});
         }
         System.out.println("<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>");
-        //return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+        return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
         return order;
-        //return "Hello User";
-    }   
+        return "Hello User";
+        
+    }  */ 
 }

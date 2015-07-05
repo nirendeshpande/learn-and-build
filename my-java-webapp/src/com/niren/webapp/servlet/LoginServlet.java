@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name="LoginServlet", urlPatterns={"jsp/Register"},
-initParams={@WebInitParam(name="simpleParam", value="paramValue") } )
+//@WebServlet(name="LoginServlet", urlPatterns={"jsp/Register"},
+//initParams={@WebInitParam(name="simpleParam", value="paramValue") } )
 public class LoginServlet extends HttpServlet {
 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

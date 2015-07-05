@@ -1,0 +1,21 @@
+<jxb:bindings version="1.0"
+               xmlns="http://java.sun.com/xml/ns/jaxb"
+			   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jxb:extensionBindingPrefixes="xjc">
+  <jxb:bindings>
+  
+  <!-- 
+       For enum to get generated we have to remove the following two attributes.
+       
+       typesafeEnumBase="xs:NCName"
+       typesafeEnumMemberName="generateName"		 
+   -->
+  
+    <jxb:globalBindings>
+    	 <xjc:superInterface name="com.medrecords.generic.Payload"/>     
+	     <xjc:serializable uid="1"/> 		 		
+    </jxb:globalBindings>	
+	</jxb:bindings> 
+</jxb:bindings>
