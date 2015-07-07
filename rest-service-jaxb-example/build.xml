@@ -75,7 +75,7 @@
       <war destfile="${build.dist.home}/rest-service-jaxb-example.war" needxmlfile='false'>   <!--  webxml="web/WEB-INF/web.xml"> -->            		 		 
 		 <classes dir="${build.classes.home}"/>
 	 	 <webinf dir="${basedir}/web/WEB-INF" 
-			includes="web.xml">
+			includes="*.xml">
 		</webinf>	
 		<fileset dir="web" includes="*.jsp"/>  	 
 	 	<lib dir="${lib.home}/internal-build">
